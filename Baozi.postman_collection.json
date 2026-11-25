@@ -1,0 +1,197 @@
+{
+  "info": {
+    "name": "Baozi Store",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "clienteId",
+      "value": "1"
+    },
+    {
+      "key": "produtoId",
+      "value": "1"
+    },
+    {
+      "key": "pedidoId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "POST clientes",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/clientes",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Guilherme5293842\",\n  \"clienteDesde\": \"2026-11-25\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code === 201) pm.collectionVariables.set(\"clienteId\", pm.response.json().id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST produtos",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/produtos",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Baozi de carne\",\n  \"preco\": 8.5,\n  \"estoque\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code === 201) pm.collectionVariables.set(\"produtoId\", pm.response.json().id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST pedidos",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/pedidos",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"clienteId\": {{clienteId}},\n  \"produtoId\": {{produtoId}},\n  \"quantidade\": 3\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code === 201) pm.collectionVariables.set(\"pedidoId\", pm.response.json().id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET clientes",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/clientes",
+        "header": []
+      }
+    },
+    {
+      "name": "GET produtos",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/produtos",
+        "header": []
+      }
+    },
+    {
+      "name": "GET pedidos",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/pedidos",
+        "header": []
+      }
+    },
+    {
+      "name": "GET clientes/{{clienteId}}",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/clientes/{{clienteId}}",
+        "header": []
+      }
+    },
+    {
+      "name": "GET produtos/{{produtoId}}",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/produtos/{{produtoId}}",
+        "header": []
+      }
+    },
+    {
+      "name": "GET pedidos/{{pedidoId}}",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/pedidos/{{pedidoId}}",
+        "header": []
+      }
+    },
+    {
+      "name": "DELETE pedidos/{{pedidoId}}",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/pedidos/{{pedidoId}}",
+        "header": []
+      }
+    },
+    {
+      "name": "DELETE produtos/{{produtoId}}",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/produtos/{{produtoId}}",
+        "header": []
+      }
+    },
+    {
+      "name": "DELETE clientes/{{clienteId}}",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/clientes/{{clienteId}}",
+        "header": []
+      }
+    }
+  ]
+}
